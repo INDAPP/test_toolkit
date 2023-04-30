@@ -1,5 +1,8 @@
 enum MockedFunctionMismatch {
   notAMockedFunction,
   wrongNumberOfCalls,
-  notCalled;
+  notCalled,
+  lessCallsThanExpected,
+  argumentsMismatch,
+  noMatchingArguments;
 }
