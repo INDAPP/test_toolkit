@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:test/test.dart';
 
-import 'mocked_function.dart';
-import 'mocked_function_mismatch.dart';
+import '../mocked_function.dart';
+import '../mocked_function_mismatch.dart';
 
 Matcher isCalledWith(List args, {int? nTh}) =>
     _MockedFunctionCallWith(args, nTh: nTh);

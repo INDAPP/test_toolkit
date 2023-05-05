@@ -1,7 +1,7 @@
 import 'package:test/test.dart';
 
-import 'mocked_function.dart';
-import 'mocked_function_mismatch.dart';
+import '../mocked_function.dart';
+import '../mocked_function_mismatch.dart';
 
 Matcher isCalled({int? times}) => _MockedFunctionCallMatcher(times: times);
 
