@@ -1,0 +1,3 @@
+staged=$(git diff --name-only -- '*.dart')
+dart format --output none --set-exit-if-changed $staged
+dart analyze --fatal-infos --fatal-warnings $staged
