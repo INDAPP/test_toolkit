@@ -51,7 +51,7 @@ class _MockedFunctionCallWith extends Matcher {
             '${callHistory.length} calls made';
         return false;
       }
-      final callArgs = callHistory[nTh - 1].sublist(0, args.length);
+      final callArgs = callHistory[nTh - 1].positionalArguments;
       if (!listEquals(args, callArgs)) {
         matchState[MockedFunctionMismatch.argumentsMismatch] =
             'Expected arguments [${args.join(', ')}] differ from those passed ['
@@ -66,7 +66,7 @@ class _MockedFunctionCallWith extends Matcher {
       if (!callHistory.any(
         (callArgs) => listEquals(
           args,
-          callArgs.sublist(0, args.length),
+          callArgs.positionalArguments,
         ),
       )) {
         matchState[MockedFunctionMismatch.noMatchingArguments] =

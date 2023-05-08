@@ -1,12 +1,22 @@
 library test_toolkit;
 
+import 'package:test_toolkit/extensions/symbol_extensions.dart';
+
 class MockedFunction {
-  final List<List> _callHistory = [];
+  final List<Invocation> _callHistory = [];
 
-  List<List> get callHistory => _callHistory.toList(growable: false);
+  List<Invocation> get callHistory => _callHistory.toList(growable: false);
 
-  call([arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9]) {
-    _callHistory
-        .add([arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9]);
+  MockedFunction._();
+
+  static create() => MockedFunction._() as dynamic;
+
+  @override
+  noSuchMethod(Invocation invocation) {
+    if (invocation.isMethod && invocation.memberName.name == 'call') {
+      _callHistory.add(invocation);
+      return;
+    }
+    return super.noSuchMethod(invocation);
   }
 }

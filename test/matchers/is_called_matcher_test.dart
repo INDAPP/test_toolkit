@@ -5,13 +5,13 @@ import 'package:test_toolkit/mocked_function.dart';
 main() {
   group('isCalled matcher', () {
     test('should match a mocked function call', () {
-      final function = MockedFunction();
+      final function = MockedFunction.create();
       function();
       expect(function, isCalled());
     });
 
     test('should match mocked function multiple calls', () {
-      final function = MockedFunction();
+      final function = MockedFunction.create();
       for (var i = 0; i < 3; i++) {
         function();
       }
@@ -19,7 +19,7 @@ main() {
     });
 
     test('should match zero call when function is not called', () {
-      final function = MockedFunction();
+      final function = MockedFunction.create();
       expect(function, isCalled(times: 0));
     });
   });
