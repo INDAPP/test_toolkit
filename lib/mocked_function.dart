@@ -9,9 +9,7 @@ class MockedFunction {
 
   List<Invocation> get callHistory => _callHistory.toList(growable: false);
 
-  MockedFunction._();
-
-  static create() => MockedFunction._() as dynamic;
+  get callable => this as dynamic;
 
   @override
   noSuchMethod(Invocation invocation) {
@@ -21,29 +19,16 @@ class MockedFunction {
     }
     return super.noSuchMethod(invocation);
   }
-}
 
-MockedFunctionInvocation onInvoke(function) {
-  if (function is! MockedFunction) {
-    throw 'Function should be a MockedFunction';
-  }
-  return MockedFunctionInvocation(function);
-}
+  void mockReturn(value) => _defaultResult = value;
 
-class MockedFunctionInvocation {
-  final MockedFunction function;
+  void mockFuture(value) => _defaultResult = Future.value(value);
 
-  MockedFunctionInvocation(this.function);
+  void mockThrows(error) => _defaultResult = Future.error(error);
 
-  void mockReturn(value) => function._defaultResult = value;
+  void mockNextReturn(value) => _results.add(value);
 
-  void mockFuture(value) => function._defaultResult = Future.value(value);
+  void mockNextFuture(value) => _results.add(Future.value(value));
 
-  void mockThrows(error) => function._defaultResult = Future.error(error);
-
-  void mockNextReturn(value) => function._results.add(value);
-
-  void mockNextFuture(value) => function._results.add(Future.value(value));
-
-  void mockNextThrows(error) => function._results.add(Future.error(error));
+  void mockNextThrows(error) => _results.add(Future.error(error));
 }
