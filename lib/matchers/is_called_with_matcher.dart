@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'package:collection/collection.dart';
 import 'package:test/test.dart';
 
 import '../mocked_function.dart';
@@ -6,6 +6,8 @@ import '../mocked_function_mismatch.dart';
 
 Matcher isCalledWith(List args, {int? nTh}) =>
     _MockedFunctionCallWith(args, nTh: nTh);
+
+Function _listEquals = const ListEquality().equals;
 
 class _MockedFunctionCallWith extends Matcher {
   final List args;
@@ -52,7 +54,7 @@ class _MockedFunctionCallWith extends Matcher {
         return false;
       }
       final callArgs = callHistory[nTh - 1].positionalArguments;
-      if (!listEquals(args, callArgs)) {
+      if (!_listEquals(args, callArgs)) {
         matchState[MockedFunctionMismatch.argumentsMismatch] =
             'Expected arguments [${args.join(', ')}] differ from those passed ['
             '${callArgs.join(', ')}]';
@@ -64,7 +66,7 @@ class _MockedFunctionCallWith extends Matcher {
         return false;
       }
       if (!callHistory.any(
-        (callArgs) => listEquals(
+        (callArgs) => _listEquals(
           args,
           callArgs.positionalArguments,
         ),

@@ -1,4 +1,4 @@
-import 'package:flutter_test/flutter_test.dart';
+import 'package:test/test.dart';
 import 'package:test_toolkit/matchers/is_called_with_matcher.dart';
 import 'package:test_toolkit/mocked_function.dart';
 
